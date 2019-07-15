@@ -185,6 +185,8 @@ class FindClassPaths(BaseMethods):
     """Finds a nested attribute within a class. If 'max_' is 0 all matches will be found"""
     def __init__(self, cls, searchfor, max_=0, searchtype='key', **kwargs):
         BaseMethods.__init__(self, cls, searchfor, searchtype, **kwargs)
+        if not hasattr(cls, '__dict__'):
+            raise TypeError('Insufficient type for FindClassPaths, item must be a class with attributes defined in __dict__')
         self.paths = []
         self.max = max_
         self.found = 0
