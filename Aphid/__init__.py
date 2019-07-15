@@ -2,7 +2,7 @@ import re
 from Aphid import objects
 
 """Contains all the shortcuts for searching nested items. All actions are defined in
-'searches'."""
+'objects'."""
 
 
 def search(iterable, searchfor, searchtype='key', **kwargs):
