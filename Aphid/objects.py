@@ -11,15 +11,15 @@ class BaseMethods:
         self.searchtype = searchtype
         self.max_depth = max_depth
 
-        ##Methods are decorated to print what they are doing if debugger is enabled
+        # Methods are decorated to print what they are doing if debugger is enabled
         self.debug = debug
         if debug:
             self.debug_setup()
             
         self.stack = Stack()
-        if isinstance(self.searchfor, re.Pattern):  #Checking if object is a regex pattern
+        if isinstance(self.searchfor, re.Pattern):  # Checking if object is a regex pattern
             self.comparision = self.regex_comparision  
-        if isinstance(self.searchfor, (list, tuple)): #Checking if object is an iterable
+        if isinstance(self.searchfor, (list, tuple)):  # Checking if object is an iterable
             self.comparision = self.iter_comparision
     
     def debug_setup(self):
@@ -96,7 +96,6 @@ class BaseMethods:
     
     def iter_comparision(self, key, value):   
         """Comparision method used if 'searchfor' is an iterable"""
-        
         if self.searchtype == 'key' and key in self.searchfor:
             return True
         elif self.searchtype == 'value' and value in self.searchfor:
@@ -150,7 +149,8 @@ class Search(BaseMethods):
 
 class Sub(BaseMethods):
     """Replace occurrences of 'searchfor' with 'new'. Only supports changing the dictionary value;
-    not the key. 'max' represents the max number of replacements and defaults to 0"""
+    not the key. 'max' represents the max number of replacements and defaults to 0
+    """
     def __init__(self, iterable, searchfor, new, max_ = 0, searchtype='key', **kwargs):
         BaseMethods.__init__(self, iterable, searchfor, searchtype, **kwargs)
         self.max = max_
@@ -186,7 +186,8 @@ class FindClassPaths(BaseMethods):
     def __init__(self, cls, searchfor, max_=0, searchtype='key', **kwargs):
         BaseMethods.__init__(self, cls, searchfor, searchtype, **kwargs)
         if not hasattr(cls, '__dict__'):
-            raise TypeError('Insufficient type for FindClassPaths, item must be a class with attributes defined in __dict__')
+            raise TypeError('Insufficient type for FindClassPaths,'
+                            'item must be a class with attributes defined in __dict__')
         self.paths = []
         self.max = max_
         self.found = 0
